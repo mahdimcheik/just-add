@@ -33,6 +33,7 @@ export class LoginPage {
         name: 'password',
         label: 'Mot de passe',
         type: 'password',
+        validation: [Validators.required],
       },
     ],
     globalValidators: [Validators.required],
