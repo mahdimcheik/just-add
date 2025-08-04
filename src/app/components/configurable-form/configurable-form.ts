@@ -463,6 +463,55 @@ export class ConfigurableForm implements OnInit {
     });
   }
 
+  // Helper method to get column span for a field
+  getFieldColumnSpan(field: FormField<any>): number {
+    // If columnSpan is explicitly set, use it
+    if (field.columnSpan) {
+      return field.columnSpan;
+    }
+
+    // Fallback to fullWidth logic for backward compatibility
+    if (field.fullWidth || field.type === 'textarea') {
+      return 2; // Default to 2 columns for full-width fields
+    }
+
+    return 1; // Default to 1 column
+  }
+
+  // Helper method to get column span for a group
+  getGroupColumnSpan(group: FormFieldGroup): number {
+    // If columnSpan is explicitly set, use it
+    if (group.columnSpan) {
+      return group.columnSpan;
+    }
+
+    return 2; // Default to 2 columns for groups
+  }
+
+  // Helper method to get column span for a unified element (field or group)
+  getElementColumnSpan(element: FormField<any> | FormFieldGroup): number {
+    if (this.isFormField(element)) {
+      return this.getFieldColumnSpan(element);
+    } else {
+      return this.getGroupColumnSpan(element);
+    }
+  }
+
+  // Helper method to get column span for a field within a group
+  getGroupFieldColumnSpan(field: FormField<any>): number {
+    // If columnSpan is explicitly set, use it
+    if (field.columnSpan) {
+      return field.columnSpan;
+    }
+
+    // Fallback to fullWidth logic for backward compatibility
+    if (field.fullWidth || field.type === 'textarea') {
+      return 2; // Default to 2 columns for full-width fields
+    }
+
+    return 1; // Default to 1 column
+  }
+
   // Helper method to check if an element is a FormField
   isFormField(
     element: FormField<any> | FormFieldGroup

@@ -27,6 +27,7 @@ export class LoginPage {
         name: 'email',
         label: 'Email',
         type: 'text',
+        columnSpan: 2,
       },
       {
         id: 'password',
@@ -34,6 +35,7 @@ export class LoginPage {
         label: 'Mot de passe',
         type: 'password',
         validation: [Validators.required],
+        columnSpan: 2,
       },
     ],
     globalValidators: [Validators.required],

@@ -13,6 +13,82 @@
   }
 }
 
+// Responsive grid utilities for 4-column layout
+.configurable-form-section {
+  // Ensure sections have proper spacing and don't overflow
+  min-width: 0;
+
+  // Responsive behavior for different screen sizes
+  @media (max-width: 767px) {
+    // On mobile, all sections take full width
+    grid-column: span 1;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    // On tablet, sections can span 1 or 2 columns
+    &.md\\:col-span-1 {
+      grid-column: span 1;
+    }
+    &.md\\:col-span-2 {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    // On desktop, sections can span 1, 2, 3, or 4 columns
+    &.lg\\:col-span-1 {
+      grid-column: span 1;
+    }
+    &.lg\\:col-span-2 {
+      grid-column: span 2;
+    }
+    &.lg\\:col-span-3 {
+      grid-column: span 3;
+    }
+    &.lg\\:col-span-4 {
+      grid-column: span 4;
+    }
+  }
+}
+
+// Field-specific responsive behavior
+.configurable-form-field {
+  // Ensure fields have proper spacing and don't overflow
+  min-width: 0;
+
+  // Responsive behavior for different screen sizes
+  @media (max-width: 767px) {
+    // On mobile, all fields take full width
+    grid-column: span 1;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    // On tablet, fields can span 1 or 2 columns
+    &.md\\:col-span-1 {
+      grid-column: span 1;
+    }
+    &.md\\:col-span-2 {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    // On desktop, fields can span 1, 2, 3, or 4 columns
+    &.lg\\:col-span-1 {
+      grid-column: span 1;
+    }
+    &.lg\\:col-span-2 {
+      grid-column: span 2;
+    }
+    &.lg\\:col-span-3 {
+      grid-column: span 3;
+    }
+    &.lg\\:col-span-4 {
+      grid-column: span 4;
+    }
+  }
+}
+
 // Essential PrimeNG overrides to fix component widths and styling
 :host ::ng-deep {
   // Ensure all PrimeNG inputs have proper styling

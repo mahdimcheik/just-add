@@ -63,7 +63,7 @@
 
       <!-- Unified form elements (fields and groups in order) -->
       <div
-        class="grid grid-cols-1 lg:grid-cols-2 gap-6 configurable-form-elements-container"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 configurable-form-elements-container"
       >
         @for (element of sortedFormElements(); track trackByElementId($index,
         element)) {
@@ -71,12 +71,12 @@
         @if (isFormField(element)) {
         <div
           class="rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow duration-200 configurable-form-section configurable-form-direct-fields"
-          [class.lg:col-span-2]="
-            element.fullWidth || element.type === 'textarea'
-          "
-          [class.lg:col-span-1]="
-            !element.fullWidth && element.type !== 'textarea'
-          "
+          [class.md:col-span-1]="getFieldColumnSpan(element) === 1"
+          [class.md:col-span-2]="getFieldColumnSpan(element) === 2"
+          [class.lg:col-span-1]="getFieldColumnSpan(element) === 1"
+          [class.lg:col-span-2]="getFieldColumnSpan(element) === 2"
+          [class.lg:col-span-3]="getFieldColumnSpan(element) === 3"
+          [class.lg:col-span-4]="getFieldColumnSpan(element) === 4"
         >
           <div
             class="space-y-2 configurable-form-field-container configurable-form-field"
@@ -278,7 +278,13 @@
         <!-- Handle form field groups -->
         @if (isFormFieldGroup(element)) {
         <div
-          class="rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow duration-200 configurable-form-section configurable-form-field-group lg:col-span-2"
+          class="rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow duration-200 configurable-form-section configurable-form-field-group"
+          [class.md:col-span-1]="getGroupColumnSpan(element) === 1"
+          [class.md:col-span-2]="getGroupColumnSpan(element) === 2"
+          [class.lg:col-span-1]="getGroupColumnSpan(element) === 1"
+          [class.lg:col-span-2]="getGroupColumnSpan(element) === 2"
+          [class.lg:col-span-3]="getGroupColumnSpan(element) === 3"
+          [class.lg:col-span-4]="getGroupColumnSpan(element) === 4"
           [class]="element.styleClass || ''"
           [formGroupName]="element.id"
         >
@@ -419,18 +425,18 @@
 
           <!-- Fields Grid -->
           <div
-            class="grid grid-cols-1 lg:grid-cols-2 gap-6 configurable-form-fields-container configurable-form-fields-grid"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 configurable-form-fields-container configurable-form-fields-grid"
           >
             @for (field of getSortedFieldsInGroup(element); track
             trackByFieldId($index, field)) {
             <div
               class="space-y-2 configurable-form-field-container configurable-form-field"
-              [class.lg:col-span-2]="
-                field.fullWidth || field.type === 'textarea'
-              "
-              [class.lg:col-span-1]="
-                !field.fullWidth && field.type !== 'textarea'
-              "
+              [class.md:col-span-1]="getGroupFieldColumnSpan(field) === 1"
+              [class.md:col-span-2]="getGroupFieldColumnSpan(field) === 2"
+              [class.lg:col-span-1]="getGroupFieldColumnSpan(field) === 1"
+              [class.lg:col-span-2]="getGroupFieldColumnSpan(field) === 2"
+              [class.lg:col-span-3]="getGroupFieldColumnSpan(field) === 3"
+              [class.lg:col-span-4]="getGroupFieldColumnSpan(field) === 4"
             >
               <!-- Field Label -->
               <label

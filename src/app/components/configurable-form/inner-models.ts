@@ -30,6 +30,7 @@ export interface FormField<T> {
 
   // Layout properties
   fullWidth?: boolean; // If true, field spans the full width (2 columns) instead of default 1 column
+  columnSpan?: 1 | 2 | 3 | 4; // Number of columns to span in the 4-column grid
 
   // File upload specific properties
   accept?: string;
@@ -57,6 +58,7 @@ export interface FormFieldGroup {
   sectionId?: string;
   groupValidators?: ValidatorFn[];
   order?: number;
+  columnSpan?: 1 | 2 | 3 | 4; // Number of columns to span in the 4-column grid
 }
 
 export interface Structure {
