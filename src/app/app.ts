@@ -5,8 +5,8 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './components/header.component';
-import { FooterComponent } from './components/footer.component';
+import { MainHeader } from './components/main-header/main-header';
+import { MainFooter } from './components/main-footer/main-footer';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +16,8 @@ import { FooterComponent } from './components/footer.component';
     CardModule,
     InputTextModule,
     FormsModule,
-    HeaderComponent,
-    FooterComponent,
+    MainHeader,
+    MainFooter,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
