@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-jokes": {
+    "just-add": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -26,9 +26,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -58,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-jokes:build:production"
+              "buildTarget": "just-add:build:production"
             },
             "development": {
-              "buildTarget": "my-jokes:build:development"
+              "buildTarget": "just-add:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,9 +78,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["src/styles.scss"]
           }
         }
       }
