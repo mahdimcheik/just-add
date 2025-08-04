@@ -9,6 +9,11 @@ import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import Aura from '@primeuix/themes/aura';
+import { provideHttpClient } from '@angular/common/http';
+import { OpenAPI } from './api';
+import { environment } from '../environments/environment.development';
+
+OpenAPI.BASE = environment.apiUrl;
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,5 +27,6 @@ export const appConfig: ApplicationConfig = {
         preset: Aura,
       },
     }),
+    provideHttpClient(),
   ],
 };

@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ConfigurableForm } from '../../components/configurable-form/configurable-form';
-import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Structure } from '../../components/configurable-form/inner-models';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { AuthMainService } from '../../services/auth-main-service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'login-page',
@@ -17,6 +19,8 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: './login-page.scss',
 })
 export class LoginPage {
+  authMainService = inject(AuthMainService);
+
   structure: Structure = {
     id: 'login',
     name: 'login',
@@ -40,4 +44,14 @@ export class LoginPage {
     ],
     globalValidators: [Validators.required],
   };
+
+  cancel() {}
+
+  async login(event: FormGroup) {
+    try {
+      await firstValueFrom(
+        this.authMainService.login(event.value.email, event.value.password)
+      );
+    } catch {}
+  }
 }

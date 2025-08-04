@@ -1,5 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { AuthService, UserResponseDto } from '../api';
+import { AuthService, RegisterDto, UserResponseDto } from '../api';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,46 @@ export class AuthMainService {
     return this.AuthService.postAuthLogin({
       email,
       password,
-    });
+    }).pipe(
+      tap((response) => {
+        this.user.set(response.data || null);
+        this.saveUser(this.user() ?? {});
+      })
+    );
+  }
+
+  loginWithToken(token: string) {
+    return this.AuthService.getAuthMe().pipe(
+      tap((response) => {
+        if (response.data) {
+          this.user.set(response.data);
+          this.saveUser(response.data);
+        } else {
+          this.user.set(null);
+          this.removeUser();
+        }
+      })
+    );
+  }
+
+  register(userRegister: RegisterDto) {
+    return this.AuthService.postAuthRegister(userRegister).pipe(
+      tap((response) => {
+        this.user.set(response.data || null);
+      })
+    );
+  }
+
+  logout() {
+    this.user.set(null);
+    this.removeUser();
+  }
+
+  saveUser(user: UserResponseDto) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  removeUser() {
+    localStorage.removeItem('user');
   }
 }

@@ -1,1 +1,5 @@
-<configurable-form [structure]="structure"></configurable-form>
+<configurable-form
+  [structure]="structure"
+  (onFormSubmit)="login($event)"
+  (onCancel)="cancel()"
+></configurable-form>
