@@ -1,0 +1,54 @@
+<div
+  class="mobile-footer fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg z-50"
+>
+  <div class="flex items-center justify-around px-4 py-2">
+    <!-- Home Button -->
+    @for(item of mainItems; track item.label) {
+    <button
+      (click)="navigateTo(item.routerLink)"
+      class="flex flex-col items-center justify-center p-2 rounded-lg transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+      [class.text-blue-600]="isActiveRoute(item.routerLink)"
+      [class.text-gray-600]="!isActiveRoute(item.routerLink)"
+    >
+      <i class="pi {{ item.icon }} text-xl mb-1"></i>
+      <span class="text-xs font-medium">{{ item.label }}</span>
+    </button>
+    }
+
+    <!-- More Options Button -->
+    <button
+      (click)="toggleMoreOptions()"
+      class="flex flex-col items-center justify-center p-2 rounded-lg transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+      [class.text-blue-600]="showMoreOptions"
+      [class.text-gray-600]="!showMoreOptions"
+    >
+      <i class="pi pi-ellipsis-h text-xl mb-1"></i>
+      <span class="text-xs font-medium">More</span>
+    </button>
+  </div>
+
+  <!-- More Options Menu -->
+  @if(showMoreOptions) {
+  <div
+    class="absolute bottom-full left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg"
+  >
+    <div class="p-4 space-y-2">
+      @for(item of authItems; track item.label) {
+      <button
+        (click)="navigateTo(item.routerLink)"
+        class="flex items-center w-full p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+      >
+        <i
+          class="pi {{
+            item.icon
+          }} text-lg mr-3 text-gray-600 dark:text-gray-400"
+        ></i>
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{
+          item.label
+        }}</span>
+      </button>
+      }
+    </div>
+  </div>
+  }
+</div>

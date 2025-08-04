@@ -9,52 +9,29 @@
     <ul
       class="list-none p-0 m-0 flex lg:items-center select-none flex-col lg:flex-row cursor-pointer gap-8"
     >
+      @for(item of mainItems; track item.label) {
       <li>
         <a
-          routerLink="/"
+          [routerLink]="item.routerLink"
           pRipple
           class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl"
         >
-          <span>Accueil</span>
+          <span>{{ item.label }}</span>
         </a>
       </li>
-
-      <li>
-        <a
-          routerLink="/dashboard"
-          pRipple
-          class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl"
-        >
-          <span>Tableau de bord</span>
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/teacher"
-          fragment="profile"
-          pRipple
-          class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl"
-        >
-          <span>Qui je suis</span>
-        </a>
-      </li>
+      }
     </ul>
     <div class="flex flex-row items-center gap-4 justify-center">
+      @for(item of authItems; track item.label) {
       <p-button
         pRipple
-        label="Connexion"
-        routerLink="/auth/login"
+        [label]="item.label"
+        [routerLink]="item.routerLink"
         [rounded]="true"
         [text]="true"
         class="flex border-t lg:border-t-0 border-surface py-4 lg:py-0 mt-4 lg:mt-0 gap-2 flex items-center justify-center"
       ></p-button>
-      <p-button
-        pRipple
-        label="Inscription"
-        routerLink="/auth/inscription"
-        [rounded]="true"
-        class="flex border-t lg:border-t-0 border-surface py-4 lg:py-0 mt-4 lg:mt-0 gap-2 flex items-center justify-center"
-      ></p-button>
+      }
     </div>
   </div>
 </div>

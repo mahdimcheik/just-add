@@ -1,11 +1,17 @@
 <div class="flex flex-col min-h-screen">
+  @if (!isMobileScreen()) {
   <main-header />
+  }
   <div
     class="p-2 lg:p-4 w-full lg:w-screen-lg lg:max-w-screen-lg mx-auto bg-red-200 flex-1"
   >
     <router-outlet />
   </div>
+  @if (!isMobileScreen()) {
   <div class="mt-auto">
     <main-footer />
   </div>
+  } @else {
+  <mobile-footer />
+  }
 </div>
