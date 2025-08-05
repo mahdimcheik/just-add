@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthMainService } from '../../services/auth-main-service';
 import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-page',
@@ -20,6 +21,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class LoginPage {
   authMainService = inject(AuthMainService);
+  route = inject(Router);
 
   structure: Structure = {
     id: 'login',
@@ -52,6 +54,7 @@ export class LoginPage {
       await firstValueFrom(
         this.authMainService.login(event.value.email, event.value.password)
       );
+      this.route.navigate(['/']);
     } catch {}
   }
 }

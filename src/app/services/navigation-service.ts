@@ -22,7 +22,7 @@ export class NavigationService {
     {
       label: 'Qui je suis',
       icon: 'pi pi-user',
-      routerLink: '/teacher',
+      routerLink: '/profile',
       fragment: 'profile',
     },
   ];

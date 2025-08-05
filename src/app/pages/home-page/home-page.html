@@ -1,0 +1,7 @@
+@if(user() && user()?.email) {
+<h1>Home Page</h1>
+<p>This is the home page content.</p>
+<p>Welcome back, {{ user()!.email }}</p>
+} @else {
+<p>Please log in.</p>
+}

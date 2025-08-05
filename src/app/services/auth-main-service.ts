@@ -1,4 +1,10 @@
-import { inject, Injectable, signal } from '@angular/core';
+import {
+  computed,
+  inject,
+  Injectable,
+  linkedSignal,
+  signal,
+} from '@angular/core';
 import { AuthService, RegisterDto, UserResponseDto } from '../api';
 import { tap } from 'rxjs';
 
@@ -8,6 +14,8 @@ import { tap } from 'rxjs';
 export class AuthMainService {
   private AuthService = inject(AuthService);
   user = signal<UserResponseDto | null>(null);
+  token = linkedSignal(() => this.user()?.token || null);
+  isConnected = computed(() => !!this.user() && !!this.user()?.email);
 
   login(email: string, password: string) {
     return this.AuthService.postAuthLogin({
@@ -21,11 +29,11 @@ export class AuthMainService {
     );
   }
 
-  loginWithToken(token: string) {
+  loginWithToken() {
     return this.AuthService.getAuthMe().pipe(
       tap((response) => {
         if (response.data) {
-          this.user.set(response.data);
+          this.user.set({ ...response.data, token: this.token() });
           this.saveUser(response.data);
         } else {
           this.user.set(null);
@@ -50,9 +58,13 @@ export class AuthMainService {
 
   saveUser(user: UserResponseDto) {
     localStorage.setItem('user', JSON.stringify(user));
+    if (user.token) {
+      localStorage.setItem('token', user.token);
+    }
   }
 
   removeUser() {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
   }
 }
