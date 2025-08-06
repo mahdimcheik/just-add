@@ -9,7 +9,7 @@
     <ul
       class="list-none p-0 m-0 flex lg:items-center select-none flex-col lg:flex-row cursor-pointer gap-8"
     >
-      @for(item of mainItems; track item.label) {
+      @for(item of mainItems(); track item.label) {
       <li>
         <a
           [routerLink]="item.routerLink"
@@ -22,13 +22,14 @@
       }
     </ul>
     <div class="flex flex-row items-center gap-4 justify-center">
-      @for(item of authItems; track item.label) {
+      @for(item of authItems(); track item.label) {
       <p-button
         pRipple
         [label]="item.label"
         [routerLink]="item.routerLink"
         [rounded]="true"
         severity="secondary"
+        (click)="item.command ? item.command({}) : null"
         class="flex border-t lg:border-t-0 border-surface py-4 lg:py-0 mt-4 lg:mt-0 gap-2 flex items-center justify-center"
       ></p-button>
       }

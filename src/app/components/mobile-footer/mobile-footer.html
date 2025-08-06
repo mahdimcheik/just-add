@@ -3,7 +3,7 @@
 >
   <div class="flex items-center justify-around px-4 py-2">
     <!-- Home Button -->
-    @for(item of mainItems; track item.label) {
+    @for(item of mainItems(); track item.label) {
     <button
       (click)="navigateTo(item.routerLink)"
       class="flex flex-col items-center justify-center p-2 rounded-lg transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -33,9 +33,10 @@
     class="absolute bottom-full left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg"
   >
     <div class="p-4 space-y-2">
-      @for(item of authItems; track item.label) {
+      @for(item of authItems(); track item.label) {
       <button
-        (click)="navigateTo(item.routerLink)"
+        (click)="item.command ? item.command({}) : null"
+        [routerLink]="item.routerLink"
         class="flex items-center w-full p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
       >
         <i

@@ -7,6 +7,7 @@ import {
 } from './utilities/guards/check-credential-guard-guard';
 import { ProfilePage } from './pages/profile-page/profile-page';
 import { getUserProfileResolver } from './utilities/resolvers/get-user-profile-resolver';
+import { AuthLayout } from './components/auth-layout/auth-layout';
 
 export const routes: Routes = [
   {
@@ -17,9 +18,25 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'login',
-    component: LoginPage,
+    path: 'auth',
+    component: AuthLayout,
     canActivate: [isNotConnectedGuard],
+    children: [
+      {
+        path: 'login',
+        component: LoginPage,
+      },
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      },
+    ],
+  },
+  {
+    path: 'login',
+    redirectTo: 'auth/login',
+    pathMatch: 'full',
   },
   {
     path: 'profile',
