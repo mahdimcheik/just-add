@@ -437,7 +437,11 @@
             <div
               class="space-y-2 configurable-form-field-container configurable-form-field"
               [class.md:col-span-1]="getGroupFieldColumnSpan(field) === 1"
-              [class.md:col-span-2]="getGroupFieldColumnSpan(field) === 2"
+              [class.md:col-span-2]="
+                getGroupFieldColumnSpan(field) === 2 ||
+                getGroupFieldColumnSpan(field) === 3 ||
+                getGroupFieldColumnSpan(field) === 4
+              "
               [class.lg:col-span-1]="getGroupFieldColumnSpan(field) === 1"
               [class.lg:col-span-2]="getGroupFieldColumnSpan(field) === 2"
               [class.lg:col-span-3]="getGroupFieldColumnSpan(field) === 3"
