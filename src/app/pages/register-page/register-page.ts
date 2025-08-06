@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ConfigurableForm } from '../../components/configurable-form/configurable-form';
 import { Structure } from '../../components/configurable-form/inner-models';
 import { Form, FormGroup } from '@angular/forms';
+import { AuthMainService } from '../../services/auth-main-service';
+import { first, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'register-page',
@@ -10,6 +12,8 @@ import { Form, FormGroup } from '@angular/forms';
   styleUrl: './register-page.scss',
 })
 export class RegisterPage {
+  authMainService = inject(AuthMainService);
+
   mainStructure: Structure = {
     id: 'register',
     name: 'register',
@@ -24,9 +28,17 @@ export class RegisterPage {
         columnSpan: 4,
         fields: [
           {
-            id: 'username',
-            name: 'username',
-            label: 'Utilisateur',
+            id: 'firstName',
+            name: 'firstName',
+            label: 'Prénom',
+            type: 'text',
+            required: true,
+            columnSpan: 2,
+          },
+          {
+            id: 'lastName',
+            name: 'lastName',
+            label: 'Nom',
             type: 'text',
             required: true,
             columnSpan: 2,
@@ -37,7 +49,7 @@ export class RegisterPage {
             label: 'Email',
             type: 'email',
             required: true,
-            columnSpan: 2,
+            columnSpan: 4,
           },
           {
             id: 'password',
@@ -60,9 +72,14 @@ export class RegisterPage {
     ],
   };
 
-  handleFormSubmit(event: FormGroup) {
-    // Handle form submission logic here
-    console.log('Form submitted:', event);
-    // You can call a service to register the user with the provided data
+  async handleFormSubmit(event: FormGroup) {
+    try {
+      await firstValueFrom(
+        this.authMainService.register(event.value.userDetails)
+      );
+    } catch (error) {
+      console.error('Error during registration:', error);
+      return;
+    }
   }
 }
