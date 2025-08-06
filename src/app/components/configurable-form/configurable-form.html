@@ -278,13 +278,18 @@
         <!-- Handle form field groups -->
         @if (isFormFieldGroup(element)) {
         <div
-          class="rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow duration-200 configurable-form-section configurable-form-field-group"
+          class="rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow duration-200 configurable-form-section configurable-form-field-group col-span-full"
           [class.md:col-span-1]="getGroupColumnSpan(element) === 1"
-          [class.md:col-span-2]="getGroupColumnSpan(element) === 2"
+          [class.md:col-span-2]="
+            getGroupColumnSpan(element) === 2 ||
+            getGroupColumnSpan(element) >= 3
+          "
           [class.lg:col-span-1]="getGroupColumnSpan(element) === 1"
           [class.lg:col-span-2]="getGroupColumnSpan(element) === 2"
           [class.lg:col-span-3]="getGroupColumnSpan(element) === 3"
-          [class.lg:col-span-4]="getGroupColumnSpan(element) === 4"
+          [class.lg:col-span-4]="
+            getGroupColumnSpan(element) === 4 || getGroupColumnSpan(element) > 4
+          "
           [class]="element.styleClass || ''"
           [formGroupName]="element.id"
         >
@@ -691,15 +696,13 @@
           </div>
 
           <!-- Action Buttons -->
-          <div
-            class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto configurable-form-buttons"
-          >
+          <div class="flex gap-3 w-full flex-row w-auto justify-end">
             @if (!structureData.hideCancelButton) {
             <p-button
               type="button"
               label="Annuler"
               severity="secondary"
-              class="w-full sm:w-auto configurable-form-button configurable-form-button-cancel"
+              class="w-auto configurable-form-button configurable-form-button-cancel"
               (onClick)="onCancelClick()"
             />
             } @if (!structureData.hideSubmitButton) {
@@ -708,7 +711,7 @@
               label="Soumettre"
               severity="primary"
               [disabled]="!isFormValid()"
-              class="w-full sm:w-auto configurable-form-button configurable-form-button-submit"
+              class="w-auto configurable-form-button configurable-form-button-submit"
             />
             }
           </div>
@@ -719,14 +722,10 @@
   </div>
 </div>
 } @else {
-<div
-  class="flex items-center justify-center p-12 bg-gray-50 rounded-lg configurable-form-empty"
->
-  <div class="text-center configurable-form-empty-content">
-    <i class="pi pi-inbox text-4xl mb-4 configurable-form-empty-icon"></i>
-    <p class="text-lg configurable-form-empty-message">
-      Aucune structure de formulaire fournie
-    </p>
+<div class="flex items-center justify-center p-12 bg-gray-50 rounded-lg mb-8">
+  <div class="text-center">
+    <i class="pi pi-inbox text-4xl mb-4"></i>
+    <p class="text-lg">Aucune structure de formulaire fournie</p>
   </div>
 </div>
 }

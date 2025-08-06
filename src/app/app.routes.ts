@@ -8,6 +8,7 @@ import {
 import { ProfilePage } from './pages/profile-page/profile-page';
 import { getUserProfileResolver } from './utilities/resolvers/get-user-profile-resolver';
 import { AuthLayout } from './components/auth-layout/auth-layout';
+import { RegisterPage } from './pages/register-page/register-page';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
       {
         path: 'login',
         component: LoginPage,
+      },
+      {
+        path: 'register',
+        component: RegisterPage,
       },
       {
         path: '',

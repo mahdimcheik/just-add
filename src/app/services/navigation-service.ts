@@ -35,9 +35,7 @@ export class NavigationService {
           {
             label: 'Profil',
             icon: 'pi pi-user',
-            command: () => {
-              this.goToProfile();
-            },
+            command: () => this.router.navigate(['/profile']),
           },
           {
             label: 'Déconnexion',
@@ -55,6 +53,14 @@ export class NavigationService {
             routerLink: '/auth/login',
             command: () => {
               this.router.navigate(['/auth/login']);
+            },
+          },
+          {
+            label: 'Inscription',
+            icon: 'pi pi-user-plus',
+            routerLink: '/auth/register',
+            command: () => {
+              this.router.navigate(['/auth/register']);
             },
           },
         ]
