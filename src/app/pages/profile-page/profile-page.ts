@@ -6,6 +6,7 @@ import { ChipModule } from 'primeng/chip';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
+import { InitialsPipe } from '../../utilities/pipes/initials-pipe';
 
 @Component({
   selector: 'profile-page',
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
     ChipModule,
     DividerModule,
     ButtonModule,
+    InitialsPipe,
   ],
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.scss',
@@ -23,38 +25,6 @@ import { CommonModule } from '@angular/common';
 export class ProfilePage {
   authMainService = inject(AuthMainService);
   user = this.authMainService.user;
-
-  // Computed properties for better display
-  userDisplayName = computed(() => {
-    const currentUser = this.user();
-    if (currentUser?.fullName) {
-      return currentUser.fullName;
-    }
-    if (currentUser?.firstName || currentUser?.lastName) {
-      return `${currentUser?.firstName || ''} ${
-        currentUser?.lastName || ''
-      }`.trim();
-    }
-    return currentUser?.email?.split('@')[0] || 'User';
-  });
-
-  userInitials = computed(() => {
-    const currentUser = this.user();
-    if (currentUser?.firstName && currentUser?.lastName) {
-      return `${currentUser.firstName.charAt(0)}${currentUser.lastName.charAt(
-        0
-      )}`.toUpperCase();
-    }
-    if (currentUser?.fullName) {
-      const names = currentUser.fullName.split(' ');
-      return names.length > 1
-        ? `${names[0].charAt(0)}${names[names.length - 1].charAt(
-            0
-          )}`.toUpperCase()
-        : names[0].charAt(0).toUpperCase();
-    }
-    return currentUser?.email?.charAt(0).toUpperCase() || 'U';
-  });
 
   formattedCreatedDate = computed(() => {
     const currentUser = this.user();
