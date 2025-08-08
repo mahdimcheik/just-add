@@ -1,113 +1,92 @@
-<div
-  class="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100 py-8 px-4"
->
-  <div class="max-w-4xl mx-auto">
-    <!-- Page Header -->
-    <div class="text-center mb-8">
-      <div class="flex justify-center mb-4">
-        <div
-          class="w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg"
-        >
-          <i class="pi pi-sign-in text-white text-2xl"></i>
+<div class="py-8 px-0 lg:py-8 lg:px-4">
+  <!-- Login Form Card -->
+  <div class="max-w-2xl mx-auto">
+    <div
+      class="bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden"
+    >
+      <!-- Card Header -->
+      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white">
+        <div class="text-center">
+          <h2 class="text-2xl font-bold mb-2">Connexion</h2>
+          <p class="text-indigo-100">
+            Accédez à votre espace personnel
+          </p>
         </div>
       </div>
-      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-        Bon Retour !
-      </h1>
-      <p class="text-gray-600 text-lg">
-        Connectez-vous à votre compte Just Add
-      </p>
+
+      <!-- Form Container -->
+      <div class="p-0 lg:p-8">
+        <configurable-form
+          [structure]="structure"
+          (onFormSubmit)="login($event)"
+          (onCancel)="cancel()"
+        ></configurable-form>
+      </div>
     </div>
 
-    <!-- Login Form Card -->
-    <div class="max-w-2xl mx-auto">
+    <!-- Additional Links -->
+    <div class="text-center mt-6">
+      <p class="text-gray-600">
+        Vous n'avez pas encore de compte ?
+        <a
+          routerLink="/auth/register"
+          class="text-indigo-600 hover:text-indigo-700 font-medium ml-1 transition-colors"
+        >
+          S'inscrire maintenant
+        </a>
+      </p>
+      <div class="mt-3">
+        <a
+          href="#"
+          class="text-gray-500 hover:text-gray-700 text-sm transition-colors"
+        >
+          Mot de passe oublié ?
+        </a>
+      </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
       <div
-        class="bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden"
+        class="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100"
       >
-        <!-- Card Header -->
         <div
-          class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white"
+          class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
         >
-          <div class="text-center">
-            <h2 class="text-2xl font-bold mb-2">Connexion</h2>
-            <p class="text-indigo-100">Accédez à votre espace personnel</p>
-          </div>
+          <i class="pi pi-desktop text-blue-600 text-xl"></i>
         </div>
-
-        <!-- Form Container -->
-        <div class="p-8">
-          <configurable-form
-            [structure]="structure"
-            (onFormSubmit)="login($event)"
-            (onCancel)="cancel()"
-          ></configurable-form>
-        </div>
-      </div>
-
-      <!-- Additional Links -->
-      <div class="text-center mt-6">
-        <p class="text-gray-600">
-          Vous n'avez pas encore de compte ?
-          <a
-            routerLink="/auth/register"
-            class="text-indigo-600 hover:text-indigo-700 font-medium ml-1 transition-colors"
-          >
-            S'inscrire maintenant
-          </a>
+        <h3 class="font-semibold text-gray-900 mb-2">Multi-plateforme</h3>
+        <p class="text-gray-600 text-sm">
+          Accédez à votre compte depuis n'importe quel appareil
         </p>
-        <div class="mt-3">
-          <a
-            href="#"
-            class="text-gray-500 hover:text-gray-700 text-sm transition-colors"
-          >
-            Mot de passe oublié ?
-          </a>
-        </div>
       </div>
 
-      <!-- Benefits Section -->
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div
+        class="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100"
+      >
         <div
-          class="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100"
+          class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
         >
-          <div
-            class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
-          >
-            <i class="pi pi-desktop text-blue-600 text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-gray-900 mb-2">Multi-plateforme</h3>
-          <p class="text-gray-600 text-sm">
-            Accédez à votre compte depuis n'importe quel appareil
-          </p>
+          <i class="pi pi-cloud text-green-600 text-xl"></i>
         </div>
+        <h3 class="font-semibold text-gray-900 mb-2">Synchronisation</h3>
+        <p class="text-gray-600 text-sm">
+          Vos données sont synchronisées en temps réel
+        </p>
+      </div>
 
+      <div
+        class="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100"
+      >
         <div
-          class="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100"
+          class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4"
         >
-          <div
-            class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
-          >
-            <i class="pi pi-cloud text-green-600 text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-gray-900 mb-2">Synchronisation</h3>
-          <p class="text-gray-600 text-sm">
-            Vos données sont synchronisées en temps réel
-          </p>
+          <i class="pi pi-star text-purple-600 text-xl"></i>
         </div>
-
-        <div
-          class="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100"
-        >
-          <div
-            class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4"
-          >
-            <i class="pi pi-star text-purple-600 text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-gray-900 mb-2">Expérience</h3>
-          <p class="text-gray-600 text-sm">
-            Interface intuitive et moderne pour une meilleure productivité
-          </p>
-        </div>
+        <h3 class="font-semibold text-gray-900 mb-2">Expérience</h3>
+        <p class="text-gray-600 text-sm">
+          Interface intuitive et moderne pour une meilleure productivité
+        </p>
       </div>
     </div>
   </div>
