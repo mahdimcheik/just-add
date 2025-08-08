@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ConfigurableForm } from '../../components/configurable-form/configurable-form';
 import { Structure } from '../../components/configurable-form/inner-models';
 import { Form, FormGroup } from '@angular/forms';
@@ -7,7 +8,7 @@ import { first, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'register-page',
-  imports: [ConfigurableForm],
+  imports: [ConfigurableForm, RouterLink],
   templateUrl: './register-page.html',
   styleUrl: './register-page.scss',
 })
@@ -18,7 +19,6 @@ export class RegisterPage {
     id: 'register',
     name: 'register',
     label: 'Inscription',
-    description: 'Veuillez remplir le formulaire pour vous inscrire.',
 
     formFieldGroups: [
       {

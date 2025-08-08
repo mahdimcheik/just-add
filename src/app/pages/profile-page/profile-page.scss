@@ -1,0 +1,143 @@
+// Profile Page Custom Styles
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+// Custom card hover effects
+:host ::ng-deep {
+  .p-card {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    }
+  }
+
+  // Custom avatar styling
+  .p-avatar {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  // Custom button styling improvements
+  .p-button {
+    transition: all 0.2s ease;
+    font-weight: 500;
+
+    &:not(.p-button-outlined) {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+      }
+    }
+
+    &.p-button-outlined {
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  // Custom chip styling
+  .p-chip {
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  // Improve card header styling
+  .p-card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    border-radius: 1rem 1rem 0 0 !important;
+  }
+
+  // Custom divider styling
+  .p-divider {
+    &.p-divider-horizontal {
+      &:before {
+        border-top-color: #e5e7eb;
+      }
+    }
+  }
+
+  // Responsive improvements
+  @media (max-width: 768px) {
+    .p-card-content {
+      padding: 1rem !important;
+    }
+
+    .p-card-header {
+      padding: 1rem !important;
+    }
+  }
+
+  // Animation for profile sections
+  .profile-section {
+    animation: fadeInUp 0.6s ease;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Status indicator styles
+  .status-indicator {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: left 0.5s;
+    }
+
+    &:hover::before {
+      left: 100%;
+    }
+  }
+
+  // Custom scrollbar for any overflowing content
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+
+    &:hover {
+      background: #a8a8a8;
+    }
+  }
+}

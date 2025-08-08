@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ConfigurableForm } from '../../components/configurable-form/configurable-form';
 import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Structure } from '../../components/configurable-form/inner-models';
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
     ReactiveFormsModule,
     ButtonModule,
     InputTextModule,
+    RouterLink,
   ],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',

@@ -1,4 +1,84 @@
-<configurable-form
-  [structure]="mainStructure"
-  (onFormSubmit)="handleFormSubmit($event)"
-></configurable-form>
+<div class="py-8 px-0 lg:py-8 lg:px-4">
+  <!-- Registration Form Card -->
+  <div class="max-w-2xl mx-auto">
+    <div
+      class="bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden"
+    >
+      <!-- Card Header -->
+      <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
+        <div class="text-center">
+          <h2 class="text-2xl font-bold mb-2">Informations d'Inscription</h2>
+          <p class="text-blue-100">
+            Remplissez le formulaire ci-dessous pour créer votre compte
+          </p>
+        </div>
+      </div>
+
+      <!-- Form Container -->
+      <div class="p-0 lg:p-8">
+        <configurable-form
+          [structure]="mainStructure"
+          (onFormSubmit)="handleFormSubmit($event)"
+        ></configurable-form>
+      </div>
+    </div>
+
+    <!-- Additional Links -->
+    <div class="text-center mt-6">
+      <p class="text-gray-600">
+        Vous avez déjà un compte ?
+        <a
+          routerLink="/auth/login"
+          class="text-blue-600 hover:text-blue-700 font-medium ml-1 transition-colors"
+        >
+          Se connecter
+        </a>
+      </p>
+    </div>
+
+    <!-- Features Section -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div
+        class="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100"
+      >
+        <div
+          class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
+          <i class="pi pi-shield text-green-600 text-xl"></i>
+        </div>
+        <h3 class="font-semibold text-gray-900 mb-2">Sécurisé</h3>
+        <p class="text-gray-600 text-sm">
+          Vos données sont protégées avec le plus haut niveau de sécurité
+        </p>
+      </div>
+
+      <div
+        class="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100"
+      >
+        <div
+          class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
+          <i class="pi pi-bolt text-blue-600 text-xl"></i>
+        </div>
+        <h3 class="font-semibold text-gray-900 mb-2">Rapide</h3>
+        <p class="text-gray-600 text-sm">
+          Inscription en quelques secondes seulement
+        </p>
+      </div>
+
+      <div
+        class="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100"
+      >
+        <div
+          class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
+          <i class="pi pi-heart text-purple-600 text-xl"></i>
+        </div>
+        <h3 class="font-semibold text-gray-900 mb-2">Gratuit</h3>
+        <p class="text-gray-600 text-sm">
+          Aucun frais caché, inscription 100% gratuite
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

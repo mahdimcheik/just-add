@@ -1,7 +1,307 @@
-<h1>Profile Page</h1>
-@if(user() && user()?.email) {
-<div>
-  <p>Email: {{ user()?.email }}</p>
-  <p>Name: {{ user()?.firstName }}</p>
+<div
+  class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4"
+>
+  <div class="max-w-4xl mx-auto">
+    <!-- Page Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+        Mon Profil
+      </h1>
+      <p class="text-gray-600 text-lg">Gérez vos informations personnelles</p>
+    </div>
+
+    @if(user() && user()?.email) {
+    <!-- Profile Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Main Profile Card -->
+      <div class="lg:col-span-2">
+        <p-card
+          styleClass="h-full shadow-lg border-0 rounded-2xl overflow-hidden"
+        >
+          <ng-template pTemplate="header">
+            <div
+              class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white"
+            >
+              <div class="flex flex-col sm:flex-row items-center gap-4">
+                <!-- Avatar -->
+                <div class="flex-shrink-0">
+                  <p-avatar
+                    [label]="userInitials()"
+                    size="xlarge"
+                    styleClass="bg-white text-blue-600 text-2xl font-bold shadow-lg"
+                    shape="circle"
+                  />
+                </div>
+
+                <!-- User Info -->
+                <div class="text-center sm:text-left flex-1">
+                  <h2 class="text-2xl md:text-3xl font-bold mb-1">
+                    {{ userDisplayName() }}
+                  </h2>
+                  <p class="text-blue-100 text-lg">
+                    {{ user()?.email }}
+                  </p>
+                  <div class="mt-3">
+                    <p-chip
+                      label="Compte Actif"
+                      styleClass="bg-green-500 text-white border-0"
+                      icon="pi pi-check-circle"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+
+          <!-- Profile Details -->
+          <div class="p-6 space-y-6">
+            <!-- Personal Information Section -->
+            <div>
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2"
+              >
+                <i class="pi pi-user text-blue-600"></i>
+                Informations Personnelles
+              </h3>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- First Name -->
+                @if (user()?.firstName) {
+                <div class="bg-gray-50 rounded-lg p-4">
+                  <label class="block text-sm font-medium text-gray-500 mb-1">
+                    Prénom
+                  </label>
+                  <p class="text-lg font-medium text-gray-900">
+                    {{ user()?.firstName }}
+                  </p>
+                </div>
+                }
+
+                <!-- Last Name -->
+                @if (user()?.lastName) {
+                <div class="bg-gray-50 rounded-lg p-4">
+                  <label class="block text-sm font-medium text-gray-500 mb-1">
+                    Nom
+                  </label>
+                  <p class="text-lg font-medium text-gray-900">
+                    {{ user()?.lastName }}
+                  </p>
+                </div>
+                }
+
+                <!-- Full Name (if available and different) -->
+                @if (user()?.fullName && user()?.fullName !== userDisplayName())
+                {
+                <div class="bg-gray-50 rounded-lg p-4 md:col-span-2">
+                  <label class="block text-sm font-medium text-gray-500 mb-1">
+                    Nom Complet
+                  </label>
+                  <p class="text-lg font-medium text-gray-900">
+                    {{ user()?.fullName }}
+                  </p>
+                </div>
+                }
+
+                <!-- Email -->
+                <div class="bg-gray-50 rounded-lg p-4 md:col-span-2">
+                  <label class="block text-sm font-medium text-gray-500 mb-1">
+                    Adresse Email
+                  </label>
+                  <p
+                    class="text-lg font-medium text-gray-900 flex items-center gap-2"
+                  >
+                    <i class="pi pi-envelope text-gray-400"></i>
+                    {{ user()?.email }}
+                  </p>
+                </div>
+
+                <!-- User ID -->
+                @if (user()?.userId) {
+                <div class="bg-gray-50 rounded-lg p-4 md:col-span-2">
+                  <label class="block text-sm font-medium text-gray-500 mb-1">
+                    Identifiant Utilisateur
+                  </label>
+                  <p
+                    class="text-sm font-mono text-gray-700 bg-white px-3 py-1 rounded border"
+                  >
+                    {{ user()?.userId }}
+                  </p>
+                </div>
+                }
+              </div>
+            </div>
+
+            <p-divider />
+
+            <!-- Account Information Section -->
+            <div>
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2"
+              >
+                <i class="pi pi-calendar text-blue-600"></i>
+                Informations du Compte
+              </h3>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Creation Date -->
+                <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+                  <label
+                    class="block text-sm font-medium text-green-700 mb-1 flex items-center gap-2"
+                  >
+                    <i class="pi pi-plus-circle"></i>
+                    Date de Création
+                  </label>
+                  <p class="text-lg font-medium text-green-900">
+                    {{ formattedCreatedDate() }}
+                  </p>
+                </div>
+
+                <!-- Last Updated -->
+                <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                  <label
+                    class="block text-sm font-medium text-blue-700 mb-1 flex items-center gap-2"
+                  >
+                    <i class="pi pi-refresh"></i>
+                    Dernière Mise à Jour
+                  </label>
+                  <p class="text-lg font-medium text-blue-900">
+                    {{ formattedUpdatedDate() }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-card>
+      </div>
+
+      <!-- Action Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="space-y-6">
+          <!-- Quick Actions Card -->
+          <p-card
+            header="Actions Rapides"
+            styleClass="shadow-lg border-0 rounded-2xl"
+          >
+            <div class="space-y-4">
+              <p-button
+                label="Modifier le Profil"
+                icon="pi pi-pencil"
+                styleClass="w-full justify-center"
+                severity="primary"
+                (onClick)="onEditProfile()"
+              />
+
+              <p-button
+                label="Changer le Mot de Passe"
+                icon="pi pi-key"
+                styleClass="w-full justify-center"
+                severity="secondary"
+                outlined="true"
+              />
+
+              <p-divider />
+
+              <p-button
+                label="Se Déconnecter"
+                icon="pi pi-sign-out"
+                styleClass="w-full justify-center"
+                severity="danger"
+                outlined="true"
+                (onClick)="onLogout()"
+              />
+            </div>
+          </p-card>
+
+          <!-- Account Status Card -->
+          <p-card
+            header="Statut du Compte"
+            styleClass="shadow-lg border-0 rounded-2xl"
+          >
+            <div class="space-y-4">
+              <div
+                class="flex items-center justify-between p-3 bg-green-50 rounded-lg"
+              >
+                <div class="flex items-center gap-2">
+                  <i class="pi pi-check-circle text-green-600"></i>
+                  <span class="text-green-800 font-medium">Compte Vérifié</span>
+                </div>
+                <p-chip
+                  label="Actif"
+                  styleClass="bg-green-500 text-white border-0 text-xs"
+                />
+              </div>
+
+              @if (user()?.token) {
+              <div
+                class="flex items-center justify-between p-3 bg-blue-50 rounded-lg"
+              >
+                <div class="flex items-center gap-2">
+                  <i class="pi pi-shield text-blue-600"></i>
+                  <span class="text-blue-800 font-medium">Session Active</span>
+                </div>
+                <p-chip
+                  label="Connecté"
+                  styleClass="bg-blue-500 text-white border-0 text-xs"
+                />
+              </div>
+              }
+            </div>
+          </p-card>
+
+          <!-- Help & Support Card -->
+          <p-card
+            header="Aide & Support"
+            styleClass="shadow-lg border-0 rounded-2xl"
+          >
+            <div class="space-y-3">
+              <a
+                href="#"
+                class="flex items-center gap-3 p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+              >
+                <i class="pi pi-question-circle"></i>
+                <span>Centre d'Aide</span>
+              </a>
+              <a
+                href="#"
+                class="flex items-center gap-3 p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+              >
+                <i class="pi pi-envelope"></i>
+                <span>Contacter le Support</span>
+              </a>
+              <a
+                href="#"
+                class="flex items-center gap-3 p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+              >
+                <i class="pi pi-book"></i>
+                <span>Documentation</span>
+              </a>
+            </div>
+          </p-card>
+        </div>
+      </div>
+    </div>
+
+    } @else {
+    <!-- Loading or No User State -->
+    <div class="text-center py-12">
+      <p-card styleClass="max-w-md mx-auto shadow-lg border-0 rounded-2xl">
+        <div class="text-center p-6">
+          <i class="pi pi-user text-6xl text-gray-400 mb-4"></i>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">
+            Aucun Utilisateur Connecté
+          </h3>
+          <p class="text-gray-600 mb-4">
+            Veuillez vous connecter pour accéder à votre profil.
+          </p>
+          <p-button
+            label="Se Connecter"
+            icon="pi pi-sign-in"
+            routerLink="/auth/login"
+            styleClass="w-full justify-center"
+          />
+        </div>
+      </p-card>
+    </div>
+    }
+  </div>
 </div>
-}
