@@ -7,10 +7,11 @@ export type UserResponseDto = {
     email?: string | null;
     firstName?: string | null;
     lastName?: string | null;
+    imgUrl?: string | null;
     fullName?: string | null;
     createdAt?: string;
     updatedAt?: string;
     token?: string | null;
-    expiresAt?: string;
+    expiresAt?: string | null;
 };
 
